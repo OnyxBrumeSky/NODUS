@@ -133,6 +133,34 @@ export default function App() {
 
   const handleInputChange = (value: string) => {
     if (!currentStepData) return;
+    console.log(currentStepData.id);
+    let tmp = formData;
+    switch (currentStepData.id) {
+      case "nom":
+        tmp.nom = value;
+        break;
+      case "prenom":
+        tmp.prenom = value;
+        break;
+      case "telephone":
+        tmp.telephone = value;
+        break;
+      case "email":
+        tmp.email = value;
+        break;  
+      case "type":
+        tmp.type = value;
+        break; 
+      case "classe":
+        tmp.classe = value;
+        break;   
+      case "source":
+        tmp.source = value;
+        break;  
+      default:
+        break;
+    }
+    console.log(tmp);
     setFormData(prev => ({
       ...prev,
       [currentStepData.id]: value,
@@ -154,9 +182,31 @@ export default function App() {
   };
 
   const handleSubmit = () => {
-    // Formulaire terminé
     console.log('Formulaire soumis:', formData);
-    alert('Merci ! Votre formulaire a été envoyé avec succès.');
+  
+    const url = "https://script.google.com/macros/s/AKfycbwgvY3xyLEZvl2Xku2nc7d3LgbA4tcy3m-aT0ttVdXlacdFJIJMP3CcZ6rHmh9a6F3pCw/exec"; // ton URL Web App
+  
+    const data = new FormData();
+    data.append("nom", formData.nom);
+    data.append("prenom", formData.prenom);
+    data.append("telephone", formData.telephone);
+    data.append("email", formData.email);
+    data.append("typePersonne", formData.typePersonne);
+    data.append("classe", formData.classe);
+    data.append("source", formData.source);
+  
+    fetch(url, {
+      method: "POST",
+      body: data,
+      mode: "no-cors",   // important pour éviter CORS
+    })
+      .then(() => {
+        alert('Merci ! Votre formulaire a été envoyé avec succès.');
+      })
+      .catch((err) => {
+        console.error("Erreur d'envoi :", err);
+        alert("Une erreur est survenue lors de l'envoi.");
+      });
   };
 
   const handleBack = () => {
