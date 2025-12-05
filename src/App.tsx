@@ -77,13 +77,13 @@ export default function App() {
       id: 'nom',
       question: 'Quel est votre nom ?',
       type: 'text',
-      placeholder: 'Votre nom',
+      placeholder: 'Nom',
     },
     {
       id: 'prenom',
       question: 'Quel est votre prénom ?',
       type: 'text',
-      placeholder: 'Votre prénom',
+      placeholder: 'Prénom',
     },
     {
       id: 'telephone',
@@ -133,7 +133,7 @@ export default function App() {
 
   const handleInputChange = (value: string) => {
     if (!currentStepData) return;
-    console.log(currentStepData.id);
+    //console.log(currentStepData.id);
     let tmp = formData;
     switch (currentStepData.id) {
       case "nom":
@@ -160,7 +160,7 @@ export default function App() {
       default:
         break;
     }
-    console.log(tmp);
+    //console.log(tmp);
     setFormData(prev => ({
       ...prev,
       [currentStepData.id]: value,
@@ -182,7 +182,7 @@ export default function App() {
   };
 
   const handleSubmit = () => {
-    console.log('Formulaire soumis:', formData);
+    //console.log('Formulaire soumis:', formData);
   
     const url = "https://script.google.com/macros/s/AKfycbwgvY3xyLEZvl2Xku2nc7d3LgbA4tcy3m-aT0ttVdXlacdFJIJMP3CcZ6rHmh9a6F3pCw/exec"; // ton URL Web App
   
@@ -505,3 +505,5 @@ export default function App() {
     </div>
   );
 }
+
+
